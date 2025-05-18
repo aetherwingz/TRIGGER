@@ -77,8 +77,7 @@ If you want to know how something works, take a look at the source code.
 
 Simply put, the shape of a trigger is constructed by "shrink wrapping" all corners, which we call **anchors**.
 
-To define a shape of your choice in code, you only need to know its **anchors**, each of which is one of Minestom's *
-*Vec**s, like this:
+To define a shape of your choice in code, you only need to know its **anchors**, each of which is one of Minestom's **Vec**s, like this:
 
 In [this](#serializing-and-deserializing-triggers-to-and-from-json-with-gson) chapter we will also cover how to load a
 previously defined shape from a JSON object using GSON.
