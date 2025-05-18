@@ -32,6 +32,8 @@ import java.util.function.Consumer;
 
 /**
  * The core logic of triggers.
+ * This system is optimized for static geometry.
+ * Triggers can be repositioned using {@link Trigger#setPosition(Pos)}, but they should not be constantly moving, since the collision detection runs per PlayerMoveEvent.
  * Simply put, the shape of a trigger is constructed by "shrink wrapping" all anchors, which is done by the {@link QuickHull3D} algorithm.
  * The resulting triangles make up the shape and are used for the collision detection and debug rendering.
  * Collision detection is based on the Separating Axis Theorem (SAT).
