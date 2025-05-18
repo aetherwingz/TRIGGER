@@ -83,7 +83,7 @@ In [an upcoming chapter](#serializing-and-deserializing-triggers-to-and-from-jso
 previously defined shape from a JSON object using GSON.
 
 ```
-// A one block large cube
+// A 2x2x2 block large cube
 List<Vec> cube = List.of(
     new Vec(0, 0, 0),
     new Vec(2, 0, 0),
@@ -96,7 +96,7 @@ List<Vec> cube = List.of(
 );
 ```
 
-This is done by the QuickHull3D algorithm.
+The main hull calculations are achieved by the [QuickHull3D](https://github.com/Quickhull3d/quickhull3d) algorithm.
 The resulting triangles make up the shape and are used for the collision detection and debug rendering.
 Collision detection is based on the Separating Axis Theorem (SAT).
 2D shapes (where all anchors are coplanar, meaning they lie on the same plane) are slightly extruded to create a more
