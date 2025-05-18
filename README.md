@@ -20,7 +20,6 @@ a response is not guaranteed though.
 ## Install
 
 TRIGGER is available through JitPack:
-
 [![](https://jitpack.io/v/CatKillsReality/TRIGGER.svg?style=flat-square)](https://jitpack.io/#CatKillsReality/TRIGGER) <<
 Replace TAG below with this commmit/version hash.
 
