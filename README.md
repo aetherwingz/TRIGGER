@@ -20,7 +20,8 @@ a response is not guaranteed though.
 ## Install
 
 The latest version of TRIGGER is available through JitPack:
-[![](https://jitpack.io/v/CatKillsReality/TRIGGER.svg?style=flat-square)](https://jitpack.io/#CatKillsReality/TRIGGER) <<
+
+[![](https://jitpack.io/v/CatKillsReality/TRIGGER.svg?style=flat-square)](https://jitpack.io/#CatKillsReality/TRIGGER)
 
 #### build.gradle (Gradle)
 
