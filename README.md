@@ -19,9 +19,8 @@ a response is not guaranteed though.
 
 ## Install
 
-TRIGGER is available through JitPack:
+The latest version of TRIGGER is available through JitPack:
 [![](https://jitpack.io/v/CatKillsReality/TRIGGER.svg?style=flat-square)](https://jitpack.io/#CatKillsReality/TRIGGER) <<
-Replace TAG below with this commmit/version hash.
 
 #### build.gradle (Gradle)
 
@@ -32,8 +31,7 @@ repositories {
 }
 
 dependencies {
-    // Make sure to replace TAG with the commit/version has above
-    implementation 'com.github.CatKillsReality:TRIGGER:TAG'
+    implementation 'com.github.CatKillsReality:TRIGGER:master-SNAPSHOT'
 }
 ```
 
@@ -46,8 +44,7 @@ repositories {
 }
 
 dependencies {
-    // Make sure to replace TAG with the commit/version has above
-    implementation("com.github.CatKillsReality:TRIGGER:TAG")
+    implementation("com.github.CatKillsReality:TRIGGER:master-SNAPSHOT")
 }
 ```
 
@@ -64,7 +61,7 @@ dependencies {
 <dependency>
     <groupId>com.github.CatKillsReality</groupId>
     <artifactId>TRIGGER</artifactId>
-    <version>TAG</version> // Make sure to replace TAG with the commit/version has above
+    <version>master-SNAPSHOT</version>
 </dependency>
 ```
 
