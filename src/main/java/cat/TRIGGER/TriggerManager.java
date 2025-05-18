@@ -35,7 +35,7 @@ import java.util.function.Consumer;
  * A utility class for managing a collection of triggers.
  * Standalone use of the {@link Trigger} class is not recommended since it does not contain any event hooks.
  */
-public class TriggerManager implements Consumer<PlayerTickEvent> {
+public class TriggerManager implements Consumer<PlayerMoveEvent> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TriggerManager.class);
     private final List<Trigger> triggers;
@@ -111,7 +111,7 @@ public class TriggerManager implements Consumer<PlayerTickEvent> {
      * @param event The {@link PlayerMoveEvent}.
      */
     @Override
-    public void accept(@NotNull PlayerTickEvent event) {
+    public void accept(@NotNull PlayerMoveEvent event) {
         final Player player = event.getPlayer();
         final Pos oldPos = player.getPosition();
         final Pos newPos = player.getPreviousPosition();
