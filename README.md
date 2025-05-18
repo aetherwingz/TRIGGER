@@ -104,5 +104,5 @@ TriggerManager triggers = new TriggerManager(true); // Create a new TriggerManag
 
 ### Serializing and Deserializing Triggers to and from JSON with GSON
 
-# TODO finish this doc
+# These docs are unfinished. I will finsish them once I have the time.
 
