@@ -13,10 +13,9 @@ Submit any issues or requests to this GitHub repository.
 - [GSON](https://github.com/google/gson)
 
 ## Contact
+
 You may also contact [@catkillsreality](https://discord.com/users/715998925433339978) on [Discord](https://discord.gg),
 a response is not guaranteed though.
-
-
 
 ## Install
 
@@ -186,6 +185,18 @@ TICK is called every tick where a player is inside the trigger. (Player is insid
 Now, to assign your newly created callback to a trigger, simply pass it in the constructor, as seen
 in [the following chapter](#creating-a-trigger).
 
+### Moving Triggers
+
+This system is not designed to handle constantly moving triggers because it checks collision every time the player
+moves, and not every game tick.
+This is intended and will likely not be changed in the future.
+
+However, triggers can be repositioned:
+
+```
+trigger.setPosition();
+```
+
 ### Creating a trigger
 
 To create a new trigger, simply call `triggers.create()` with triggers being your [TriggerManager](#triggermanager)
@@ -248,6 +259,7 @@ Keep in mind that this only loads the position, anchors and name of the trigger.
 - The [TriggeredCallback](#trigger-event-callbacks) defaults to logging an error message if the callback is not replaced
 
 #### Setting the proper callback
+
 ```
 trigger.setTriggeredCallback(callback);
 ```
