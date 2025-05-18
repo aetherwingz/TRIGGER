@@ -114,7 +114,7 @@ public class TriggerManager implements Consumer<PlayerMoveEvent> {
     public void accept(@NotNull PlayerMoveEvent event) {
         final Player player = event.getPlayer();
         final Pos oldPos = player.getPosition();
-        final Pos newPos = player.getPreviousPosition();
+        final Pos newPos = event.getNewPosition();
 
         List<Vec> previousPoints = Trigger.getHitboxPoints(oldPos, player);
         List<Vec> currentPoints = Trigger.getHitboxPoints(newPos, player);
