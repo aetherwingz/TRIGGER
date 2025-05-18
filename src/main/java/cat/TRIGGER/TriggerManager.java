@@ -52,10 +52,6 @@ public class TriggerManager implements Consumer<PlayerMoveEvent> {
         if (debug) {
             MinecraftServer.getSchedulerManager().buildTask(() -> MinecraftServer.getConnectionManager().getOnlinePlayers().forEach(player -> triggers.forEach(trigger -> trigger.render(player)))).repeat(TaskSchedule.nextTick()).schedule();
         }
-
-        // The main movement hook.
-        MinecraftServer.getGlobalEventHandler().addListener(PlayerMoveEvent.class, this);
-
     }
 
     /**
@@ -70,8 +66,6 @@ public class TriggerManager implements Consumer<PlayerMoveEvent> {
         if (debug) {
             MinecraftServer.getSchedulerManager().buildTask(() -> MinecraftServer.getConnectionManager().getOnlinePlayers().forEach(player -> triggers.forEach(trigger -> trigger.render(player)))).repeat(TaskSchedule.nextTick()).schedule();
         }
-
-        MinecraftServer.getGlobalEventHandler().addListener(PlayerMoveEvent.class, this);
     }
 
     public Trigger create(List<Vec> anchors, Vec position, UUID uuid, Component name, RGBLike color, Consumer<TriggeredCallback> triggeredCallback) {
