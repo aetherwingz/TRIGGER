@@ -112,7 +112,6 @@ public class TriggerTypeAdapter extends TypeAdapter<Trigger> {
             }
         }
         in.endObject();
-        LOGGER.info("Created {} from JSON", PlainTextComponentSerializer.plainText().serialize(name));
         return new Trigger(anchors, position, UUID.randomUUID(), name, NamedTextColor.RED, null);
     }
 }
