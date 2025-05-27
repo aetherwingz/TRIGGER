@@ -1,5 +1,7 @@
 # TRIGGER
 
+**This is no longer actively maintained, you may still submit issues and PRs though.**
+
 TRIGGER provides easy to use area-based triggers for minestom that you can tailor to your use case.
 
 The core implementation is powered by the bundled [QuickHull3D](https://github.com/Quickhull3d/quickhull3d) algorithm.
