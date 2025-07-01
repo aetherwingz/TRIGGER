@@ -212,9 +212,9 @@ public class TriggerManager {
     }
 
     public void registerEvents(EventNode<Event> handler) {
-        handler.addListener(PlayerMoveEvent.class, this::playerMoveEvent);
-        handler.addListener(EntityTeleportEvent.class, this::entityTeleportEvent);
-        handler.addListener(EntitySpawnEvent.class, this::entitySpawnEvent);
+        handler.addListener(PlayerMoveEvent.class, this::playerMoveEvent)
+                .addListener(EntityTeleportEvent.class, this::entityTeleportEvent)
+                .addListener(EntitySpawnEvent.class, this::entitySpawnEvent);
     }
 
     /**
