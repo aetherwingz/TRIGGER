@@ -17,6 +17,7 @@ import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.entity.Player;
+import net.minestom.server.event.entity.EntityTeleportEvent;
 import net.minestom.server.event.player.PlayerMoveEvent;
 import net.minestom.server.event.player.PlayerTickEvent;
 import net.minestom.server.timer.TaskSchedule;
@@ -35,7 +36,7 @@ import java.util.function.Consumer;
  * A utility class for managing a collection of triggers.
  * Standalone use of the {@link Trigger} class is not recommended since it does not contain any event hooks.
  */
-public class TriggerManager implements Consumer<PlayerMoveEvent> {
+public class TriggerManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TriggerManager.class);
     private final List<Trigger> triggers;
@@ -110,8 +111,7 @@ public class TriggerManager implements Consumer<PlayerMoveEvent> {
      * The main movement event hook that glues the underlying collision logic together.
      * @param event The {@link PlayerMoveEvent}.
      */
-    @Override
-    public void accept(@NotNull PlayerMoveEvent event) {
+    public void playerMoveEvent(PlayerMoveEvent event) {
         final Player player = event.getPlayer();
         final Pos oldPos = player.getPosition();
         final Pos newPos = event.getNewPosition();
@@ -142,6 +142,44 @@ public class TriggerManager implements Consumer<PlayerMoveEvent> {
             }
         }
     }
+
+    /**
+     * The main teleport event hook that glues the underlying collision logic together.
+     * @param event The {@link EntityTeleportEvent}.
+     */
+    public void entityTeleportEvent(EntityTeleportEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            final Pos oldPos = player.getPosition();
+            final Pos newPos = event.getNewPosition();
+
+            List<Vec> previousPoints = Trigger.getHitboxPoints(oldPos, player);
+            List<Vec> currentPoints = Trigger.getHitboxPoints(newPos, player);
+
+            for (Trigger trigger : triggers) {
+                // skip expensive checks if the player is nowhere near that trigger
+                final double checkRadius = trigger.getCheckRadius();
+                if (trigger.getPosition().distanceSquared(oldPos) > checkRadius * checkRadius) {
+                    continue;
+                } else if (trigger.getPosition().distanceSquared(newPos) > checkRadius * checkRadius) {
+                    continue;
+                }
+
+                boolean wasInside = trigger.contains(previousPoints);
+                boolean isInside = trigger.contains(currentPoints);
+
+                if (isInside) {
+                    trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
+                }
+
+                if (!wasInside && isInside) {
+                    trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.ENTERED));
+                } else if (wasInside && !isInside) {
+                    trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.EXITED));
+                }
+            }
+        }
+    }
+
 
     /**
      * Remove a trigger from {@link TriggerManager#triggers}.
