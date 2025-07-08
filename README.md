@@ -1,6 +1,6 @@
 # TRIGGER
 
-**This is no longer actively maintained, you may still submit issues and PRs though. I may also update this to the latest minestom version at request.**
+**This is no longer actively maintained due to time limitations, you may still submit issues and PRs though. I may also update this to the latest minestom version at request.**
 
 TRIGGER provides easy to use area-based triggers for minestom that you can tailor to your use case.
 
