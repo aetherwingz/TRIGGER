@@ -119,12 +119,10 @@ TriggerManager triggers = new TriggerManager(true); // Create a new TriggerManag
 Beware that enabling debug enables debug rendering, which can cause mostly client, but also some server lag on weaker
 machines due to the nature of particles in larger quantities.
 
-It does not add itself as an event handler by default. You should think about who it should apply to, and register it
-accordingly.
-For simplicity's sake, we'll just register it globally here:
+The following will register all triggers with the event handler:
 
 ```
-MinecraftServer.getGlobalEventHandler().addListener(PlayerMoveEvent.class, triggers);
+triggers.registerEvents(MinecraftServer.getGlobalEventHandler());
 ```
 
 **Make sure that you register the handler AFTER MinecraftServer.init()**
