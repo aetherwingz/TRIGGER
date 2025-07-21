@@ -491,7 +491,7 @@ public class Trigger {
      * @param json The JSON String to deserialize
      * @return The new trigger from JSON
      */
-    public Trigger fromJSON(String json) {
+    public static Trigger fromJSON(String json) {
         return TriggerGlobals.GSON.fromJson(json, Trigger.class);
     }
 
