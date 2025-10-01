@@ -16,7 +16,7 @@ Submit any issues or requests to this GitHub repository.
 
 ## Contact
 
-You may also contact [@catkillsreality](https://discord.com/users/715998925433339978) on [Discord](https://discord.gg),
+You may also contact [@aetherwingz](https://discord.com/users/715998925433339978) on [Discord](https://discord.gg),
 a response is not guaranteed though.
 
 ## Install
