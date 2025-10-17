@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation("net.minestom:minestom-snapshots:1_21_5-69b9a5d844")
+    implementation("net.minestom:minestom:2025.09.13-1.21.8")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

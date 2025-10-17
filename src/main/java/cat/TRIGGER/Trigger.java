@@ -124,7 +124,7 @@ public class Trigger {
 
     /**
      * Internal method for calculating the distance between {@link Trigger#position} and the furthest {@link Trigger#anchors anchor}.
-     * The {@link Trigger#checkRadius radius} used to check if you're near a trigger or not in order to skip more expensive calculations, used in the main collision {@link TriggerManager#accept(PlayerMoveEvent) handler}.
+     * The {@link Trigger#checkRadius radius} used to check if you're near a trigger or not in order to skip more expensive calculations.
      * @param anchors The list of anchors to search through.
      * @param position The position to calculate distance to the furthest anchor from.
      * @return The distance from the position to the furthest anchor.
