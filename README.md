@@ -119,7 +119,7 @@ TriggerManager triggers = new TriggerManager(true); // Create a new TriggerManag
 Beware that enabling debug enables debug rendering, which can cause mostly client, but also some server lag on weaker
 machines due to the nature of particles in larger quantities.
 
-The following will register all triggers with the event handler:
+The following will register all triggers with your event handler of choice:
 
 ```
 triggers.registerEvents(MinecraftServer.getGlobalEventHandler());
