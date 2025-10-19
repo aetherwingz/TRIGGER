@@ -134,14 +134,14 @@ public class TriggerManager {
             boolean wasInside = trigger.contains(previousPoints);
             boolean isInside = trigger.contains(currentPoints);
 
-            if (isInside) {
-                trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
-            }
-
             if (!wasInside && isInside) {
                 trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.ENTERED));
             } else if (wasInside && !isInside) {
                 trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.EXITED));
+            }
+
+            if (isInside) {
+                trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
             }
         }
     }
@@ -170,14 +170,14 @@ public class TriggerManager {
                 boolean wasInside = trigger.contains(previousPoints);
                 boolean isInside = trigger.contains(currentPoints);
 
-                if (isInside) {
-                    trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
-                }
-
                 if (!wasInside && isInside) {
                     trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.ENTERED));
                 } else if (wasInside && !isInside) {
                     trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.EXITED));
+                }
+
+                if (isInside) {
+                    trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
                 }
             }
         }
@@ -211,7 +211,7 @@ public class TriggerManager {
         }
     }
 
-    public void registerEvents(EventNode<Event> handler) {
+    public void registerEvents(EventNode<@NotNull Event> handler) {
         handler.addListener(PlayerMoveEvent.class, this::playerMoveEvent)
                 .addListener(EntityTeleportEvent.class, this::entityTeleportEvent)
                 .addListener(EntitySpawnEvent.class, this::entitySpawnEvent);
