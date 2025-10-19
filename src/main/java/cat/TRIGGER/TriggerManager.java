@@ -140,10 +140,6 @@ public class TriggerManager {
             } else if (wasInside && !isInside) {
                 trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.EXITED));
             }
-
-            if (isInside) {
-                trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
-            }
         }
     }
 
@@ -175,10 +171,6 @@ public class TriggerManager {
                     trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.ENTERED));
                 } else if (wasInside && !isInside) {
                     trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.EXITED));
-                }
-
-                if (isInside) {
-                    trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
                 }
             }
         }
