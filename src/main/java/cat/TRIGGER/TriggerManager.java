@@ -22,6 +22,7 @@ import net.minestom.server.event.EventNode;
 import net.minestom.server.event.entity.EntitySpawnEvent;
 import net.minestom.server.event.entity.EntityTeleportEvent;
 import net.minestom.server.event.player.PlayerMoveEvent;
+import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.event.player.PlayerTickEvent;
 import net.minestom.server.timer.TaskSchedule;
 import org.jetbrains.annotations.NotNull;
@@ -187,26 +188,50 @@ public class TriggerManager {
      * The main spawn event hook that glues the underlying collision logic together.
      * @param event The {@link EntitySpawnEvent}.
      */
-    public void entitySpawnEvent(EntitySpawnEvent event) {
-        if (event.getEntity() instanceof Player player) {
-            final Pos spawnPos = player.getPosition();
+    public void playerSpawnEvent(PlayerSpawnEvent event) {
+        Player player = event.getEntity();
+        final Pos spawnPos = player.getPosition();
 
-            List<Vec> currentPoints = Trigger.getHitboxPoints(spawnPos, player);
+        List<Vec> currentPoints = Trigger.getHitboxPoints(spawnPos, player);
 
-            for (Trigger trigger : triggers) {
-                // skip expensive checks if the player is nowhere near that trigger
-                final double checkRadius = trigger.getCheckRadius();
-                if (trigger.getPosition().distanceSquared(spawnPos) > checkRadius * checkRadius) {
-                    continue;
-                }
+        for (Trigger trigger : triggers) {
+            // skip expensive checks if the player is nowhere near that trigger
+            final double checkRadius = trigger.getCheckRadius();
+            if (trigger.getPosition().distanceSquared(spawnPos) > checkRadius * checkRadius) {
+                continue;
+            }
 
-                boolean isInside = trigger.contains(currentPoints);
+            boolean isInside = trigger.contains(currentPoints);
 
-                // The player either spawns inside or not inside
-                if (isInside) {
-                    trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
-                    trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.ENTERED));
-                }
+            // The player either spawns inside or not inside
+            if (isInside) {
+                trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
+                trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.ENTERED));
+            }
+        }
+    }
+
+    /**
+     * Tick event hook to make sure trigger tick callback still fires if player is standing still
+     * @param event The {@link PlayerTickEvent}
+     */
+    public void playerTickEvent(PlayerTickEvent event) {
+        final Player player = event.getPlayer();
+        final Pos pos = player.getPosition();
+
+        List<Vec> currentPoints = Trigger.getHitboxPoints(pos, player);
+
+        for (Trigger trigger : triggers) {
+            // skip expensive checks if the player is nowhere near that trigger
+            final double checkRadius = trigger.getCheckRadius();
+            if (trigger.getPosition().distanceSquared(pos) > checkRadius * checkRadius) {
+                continue;
+            }
+
+            boolean isInside = trigger.contains(currentPoints);
+
+            if (isInside) {
+                trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
             }
         }
     }
@@ -214,7 +239,8 @@ public class TriggerManager {
     public void registerEvents(EventNode<@NotNull Event> handler) {
         handler.addListener(PlayerMoveEvent.class, this::playerMoveEvent)
                 .addListener(EntityTeleportEvent.class, this::entityTeleportEvent)
-                .addListener(EntitySpawnEvent.class, this::entitySpawnEvent);
+                .addListener(PlayerSpawnEvent.class, this::playerSpawnEvent)
+                .addListener(PlayerTickEvent.class, this::playerTickEvent);
     }
 
     /**
