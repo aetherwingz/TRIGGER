@@ -197,7 +197,6 @@ public class TriggerManager {
 
             // The player either spawns inside or not inside
             if (isInside) {
-                trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.TICK));
                 trigger.getTriggeredCallback().accept(new TriggeredCallback(player, trigger, TriggeredCallback.Type.ENTERED));
             }
         }
